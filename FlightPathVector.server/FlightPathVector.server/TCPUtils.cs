@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -115,11 +114,10 @@ namespace FlightPathVector.server
                 bool ConnectionClosed = handler.Poll(1000, SelectMode.SelectRead);
                 if (!ConnectionClosed)
                 {
-
                     // Begin sending the data to the remote device.  
                     handler.BeginSend(byteData, 0, byteData.Length, 0,
                         new AsyncCallback(SendCallback), handler);
-                    Console.WriteLine(data);
+                    //Console.WriteLine(data);
                 }
             }
         }
