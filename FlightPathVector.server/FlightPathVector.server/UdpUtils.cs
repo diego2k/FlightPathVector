@@ -84,7 +84,7 @@ namespace FlightPathVector.server
             }
 
             string dataRow = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12}",
-              send.username, DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"), send.Time, send.FlightScore, send.QuizScore,
+              send.username, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), send.Time, send.FlightScore, send.QuizScore,
               send.UserAnswers[0], send.UserAnswers[1], send.UserAnswers[2], send.UserAnswers[3],
               correctAnswerArray[0], correctAnswerArray[1], correctAnswerArray[2], correctAnswerArray[3]) + Environment.NewLine;
 

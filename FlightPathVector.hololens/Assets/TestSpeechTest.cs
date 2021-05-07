@@ -12,8 +12,6 @@ public class TestSpeechTest : MonoBehaviour, ISpeechHandler
   public Button button2;
   public Button button3;
   public Button button4;
-  public Button button5;
-  public Button button6;
   public Text help;
   public GameObject help2;
 
@@ -73,16 +71,6 @@ public class TestSpeechTest : MonoBehaviour, ISpeechHandler
           activeButton = button4;
         }
         break;
-      case "five":
-        {
-          activeButton = button5;
-        }
-        break;
-      case "six":
-        {
-          activeButton = button6;
-        }
-        break;
       case "help":
         {
           help.enabled = !help.enabled;
@@ -126,8 +114,6 @@ public class TestSpeechTest : MonoBehaviour, ISpeechHandler
     var ch2 = GameObject.Find("Image 2").GetComponent<Image>();
     var ch3 = GameObject.Find("Image 3").GetComponent<Image>();
     var ch4 = GameObject.Find("Image 4").GetComponent<Image>();
-    var ch5 = GameObject.Find("Image 5").GetComponent<Image>();
-    var ch6 = GameObject.Find("Image 6").GetComponent<Image>();
     var text = GameObject.Find("Question").GetComponent<Text>();
     var finish = GameObject.Find("Finish").GetComponentInChildren<Text>();
 
@@ -182,26 +168,20 @@ public class TestSpeechTest : MonoBehaviour, ISpeechHandler
         ch2.enabled = true;
         ch3.enabled = true;
         ch4.enabled = true;
-        ch5.enabled = true;
-        ch6.enabled = true;
 
         var checkSprite = Resources.Load<Sprite>("check");
         var crossSprite = Resources.Load<Sprite>("cross");
 
-        ch1.sprite = (DataListener.criteria.TooLeft == user_answers[0]) ? checkSprite : crossSprite;
-        ch2.sprite = (DataListener.criteria.TooRight == user_answers[1]) ? checkSprite : crossSprite;
-        ch3.sprite = (DataListener.criteria.TooLow == user_answers[2]) ? checkSprite : crossSprite;
-        ch4.sprite = (DataListener.criteria.TooHigh == user_answers[3]) ? checkSprite : crossSprite;
-        ch5.sprite = (DataListener.criteria.TooSlow == user_answers[4]) ? checkSprite : crossSprite;
-        ch6.sprite = (DataListener.criteria.TooFast == user_answers[5]) ? checkSprite : crossSprite;
+        ch1.sprite = (DataListener.criteria.TooShort == user_answers[0]) ? checkSprite : crossSprite;
+        ch2.sprite = (DataListener.criteria.TooFar == user_answers[1]) ? checkSprite : crossSprite;
+        ch3.sprite = (DataListener.criteria.TooSlow == user_answers[2]) ? checkSprite : crossSprite;
+        ch4.sprite = (DataListener.criteria.TooFast == user_answers[3]) ? checkSprite : crossSprite;
 
         int score = 0;
-        score += (DataListener.criteria.TooLeft == user_answers[0]) ? 2 : 0;
-        score += (DataListener.criteria.TooRight == user_answers[1]) ? 2 : 0;
-        score += (DataListener.criteria.TooLow == user_answers[2]) ? 2 : 0;
-        score += (DataListener.criteria.TooHigh == user_answers[3]) ? 2 : 0;
-        score += (DataListener.criteria.TooSlow == user_answers[4]) ? 2 : 0;
-        score += (DataListener.criteria.TooFast == user_answers[5]) ? 2 : 0;
+        score += (DataListener.criteria.TooShort == user_answers[0]) ? 2 : 0;
+        score += (DataListener.criteria.TooFar == user_answers[1]) ? 2 : 0;
+        score += (DataListener.criteria.TooSlow == user_answers[2]) ? 2 : 0;
+        score += (DataListener.criteria.TooFast == user_answers[3]) ? 2 : 0;
 
 
         UserData.score = score;
@@ -225,8 +205,6 @@ public class TestSpeechTest : MonoBehaviour, ISpeechHandler
     var ch2 = GameObject.Find("Image 2").GetComponent<Image>();
     var ch3 = GameObject.Find("Image 3").GetComponent<Image>();
     var ch4 = GameObject.Find("Image 4").GetComponent<Image>();
-    var ch5 = GameObject.Find("Image 5").GetComponent<Image>();
-    var ch6 = GameObject.Find("Image 6").GetComponent<Image>();
     var text = GameObject.Find("Question").GetComponent<Text>();
     var finish = GameObject.Find("Finish").GetComponentInChildren<Text>();
 
@@ -255,8 +233,6 @@ public class TestSpeechTest : MonoBehaviour, ISpeechHandler
     ch2.enabled = false;
     ch3.enabled = false;
     ch4.enabled = false;
-    ch5.enabled = false;
-    ch6.enabled = false;
     finish.text = "Finish";
     text.text = "Rate your approach!";
 

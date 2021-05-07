@@ -5,8 +5,6 @@ using System;
 
 public class InputHandler1 : MonoBehaviour, IInputClickHandler, IInputHandler
 {
-
-
   public void ButtonCalled()
   {
     try
@@ -37,6 +35,7 @@ public class InputHandler1 : MonoBehaviour, IInputClickHandler, IInputHandler
     }
 
   }
+
 
   public void OnInputClicked(InputClickedEventData eventData)
   {
@@ -71,11 +70,11 @@ public class InputHandler1 : MonoBehaviour, IInputClickHandler, IInputHandler
 
   public void OnInputDown(InputEventData eventData)
   {
-    // throw new System.NotImplementedException();
+    //throw new System.NotImplementedException();
   }
 
   public void OnInputUp(InputEventData eventData)
   {
-    //throw new System.NotImplementedException();
+    // throw new System.NotImplementedException();
   }
 }

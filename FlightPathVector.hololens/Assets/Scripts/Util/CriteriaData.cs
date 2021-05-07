@@ -6,17 +6,11 @@ public class CriteriaData
   [JsonProperty("Usercode")]
   public string Usercode { get; set; }
 
-  [JsonProperty("TooLeft")]
-  public bool TooLeft { get; set; }
+  [JsonProperty("TooShort")]
+  public bool TooShort { get; set; }
 
-  [JsonProperty("TooRight")]
-  public bool TooRight { get; set; }
-
-  [JsonProperty("TooLow")]
-  public bool TooLow { get; set; }
-
-  [JsonProperty("TooHigh")]
-  public bool TooHigh { get; set; }
+  [JsonProperty("TooFar")]
+  public bool TooFar { get; set; }
 
   [JsonProperty("TooFast")]
   public bool TooFast { get; set; }

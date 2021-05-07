@@ -75,6 +75,6 @@ public class InputHandler2 : MonoBehaviour, IInputClickHandler, IInputHandler
 
   public void OnInputUp(InputEventData eventData)
   {
-   // throw new System.NotImplementedException();
+    // throw new System.NotImplementedException();
   }
 }
