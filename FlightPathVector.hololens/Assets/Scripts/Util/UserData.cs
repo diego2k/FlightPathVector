@@ -7,39 +7,41 @@ using UnityEngine;
 
 public class UserData
 {
-  public static string time;
+    public static string time;
 
-  public List<bool> UserAnswers;
-  public string username;
-  public string CorrectAnswers;
-  public string time_;
-  public static int score;
-  public static float calculateScore;
-  public float score_;
+    public List<bool> UserAnswers;
+    public string Username;
+    public string CorrectAnswers;
+    public string time_;
 
-  public UserData() { }
-  public UserData(string username, string CorrectAnswers, List<bool> UserAnswers, string time, float score)
-  {
-    this.username = username;
-    this.UserAnswers = UserAnswers;
-    this.CorrectAnswers = CorrectAnswers;
-    this.time_ = time;
-    this.score_ = score;
-  }
+    public float FlightScore { get; set; }
 
+    public float QuizScore { get; set; }
 
-  public override string ToString()
-  {
-    try
+    public UserData() { }
+    public UserData(string username, string correctAnswers, List<bool> userAnswers, string time, float flightScore, float quizScore)
     {
-      string json = JsonConvert.SerializeObject(this);
-      return json;
+        Username = username;
+        CorrectAnswers = correctAnswers;
+        UserAnswers = userAnswers;
+        time_ = time;
+        FlightScore = flightScore;
+        QuizScore = quizScore;
     }
-    catch(Exception e)
+
+
+    public override string ToString()
     {
-      var x = 0;
+        try
+        {
+            string json = JsonConvert.SerializeObject(this);
+            return json;
+        }
+        catch (Exception e)
+        {
+            var x = 0;
+        }
+        return "";
     }
-    return "";
-  }
 
 }

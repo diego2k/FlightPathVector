@@ -5,7 +5,7 @@ namespace FlightPathVector.server.Models
 {
     public class UserData
     {
-        [JsonProperty("username")]
+        [JsonProperty("Username")]
         public string username { get; set; }
 
         [JsonProperty("UserAnswers")]

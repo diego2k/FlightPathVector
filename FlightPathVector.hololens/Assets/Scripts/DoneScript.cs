@@ -1,6 +1,7 @@
 ﻿using HoloToolkit.Unity.InputModule;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,10 +25,16 @@ public class DoneScript : MonoBehaviour, IInputClickHandler, IInputHandler, ISpe
 
     void Update()
     {
-        var sc = UserData.score + UserData.calculateScore;
-        eval.text = "Congratulation! You Scored " + sc + " points!";
-        points.text = "Your Approach: " + UserData.calculateScore + " points";
-        points2.text = "Correct Answers: " + UserData.score;
+        if (DataListener.LAST_USERDATA != null)
+        {
+            eval.text = $"Congratulation! You Scored {(DataListener.LAST_USERDATA.FlightScore + DataListener.LAST_USERDATA.QuizScore).ToString("F0", CultureInfo.InvariantCulture)} Points!";
+            points.text = "Your Approach: " + DataListener.LAST_USERDATA.FlightScore.ToString("F0", CultureInfo.InvariantCulture) + " Points";
+            points2.text = "Correct Answers: " + DataListener.LAST_USERDATA.QuizScore.ToString("F0", CultureInfo.InvariantCulture);
+        }
+        else
+        {
+            eval.text = "No data available!";
+        }
     }
 
     public void OnSpeechKeywordRecognized(SpeechEventData eventData)

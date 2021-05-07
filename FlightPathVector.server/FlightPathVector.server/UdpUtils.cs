@@ -24,10 +24,12 @@ namespace FlightPathVector.server
             receivingUdpClient.EnableBroadcast = true;
             receivingUdpClient.Client.EnableBroadcast = true;
 
+            ulong count = 0;
             while (true)
             {
                 try
                 {
+                    count++;
                     Byte[] receiveBytes = receivingUdpClient.Receive(ref endpoint);
 
                     if (type == "aircraft")
@@ -38,6 +40,8 @@ namespace FlightPathVector.server
                     else if (type == "criteria")
                     {
                         var json = CriteriaData.ConvertCriteriaData(receiveBytes);
+                        if (count % 100 == 0)
+                            Console.WriteLine($"Send CriteriaData to HoloLens: {json}");
                         AsynchronousSocketListener.Send(json);
                     }
                     else if (type == "speed")
@@ -62,8 +66,8 @@ namespace FlightPathVector.server
         public static void SendToSimulator(string toSend)
         {
             //string data = "{\"UserAnswers\":[false,false,false,false,false,true],\"username\":\"USER/22/5\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\",\"CorrectAnswers\":\"011010\",\"time_\":\"19\",\"score_\":4}";
-            string data = "{\"UserAnswers\":[false,false,false,false],\"username\":\"RB\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\",\"CorrectAnswers\":\"0101\",\"time_\":\"7.304\",\"score_\":0.0,\"FlightScore\":82.85173,\"QuizScore\":50.0}";
-            var send = JsonConvert.DeserializeObject<UserData>(data);
+            //string data = "{\"UserAnswers\":[false,false,false,false],\"username\":\"RB\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000\",\"CorrectAnswers\":\"0101\",\"time_\":\"7.304\",\"score_\":0.0,\"FlightScore\":82.85173,\"QuizScore\":50.0}";
+            var send = JsonConvert.DeserializeObject<UserData>(toSend);
 
             var cleaned_user = send.username.Replace("\0", string.Empty);
             string user = Regex.Replace(cleaned_user, @"[^0-9a-zA-Z]+", "-");

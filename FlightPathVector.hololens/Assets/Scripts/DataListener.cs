@@ -30,7 +30,7 @@ public class DataListener : MonoBehaviour
     public Text time;
     public Text speed;
 
-    public string userString;
+    public string UserCode;
     public string truespeed;
     public AirCraftKinematicsData data;
     public static CriteriaData criteria;
@@ -38,14 +38,7 @@ public class DataListener : MonoBehaviour
     public static bool SuccessfulLanding = true;
     private bool SimulationRunning = true;
 
-
-    public List<float> IAS_values = new List<float>();
-    public List<float> LAT_values = new List<float>();
-    public List<float> VERT_values = new List<float>();
-
-    public static float Sum_Lateral;
-    public static float Sum_IAS;
-    public static float Sum_VER;
+    public static UserData LAST_USERDATA = null;
 
 #if WINDOWS_UWP
     public static StreamSocket socket;
@@ -106,7 +99,7 @@ public class DataListener : MonoBehaviour
                         else if (env.type == "criteria")
                         {
                             criteria = JsonConvert.DeserializeObject<CriteriaData>(env.content);
-                            userString = criteria.Usercode;
+                            UserCode = criteria.Usercode;
                             checkCriteriaData(criteria);
                         }
                         else if (env.type == "speed")
@@ -153,9 +146,9 @@ public class DataListener : MonoBehaviour
 
     void Update()
     {
-        if (userString != "")
+        if (UserCode != "")
         {
-            Username.text = userString;
+            Username.text = UserCode;
         }
 
         if (truespeed != "")
@@ -222,50 +215,12 @@ public class DataListener : MonoBehaviour
 
     public void checkCriteriaData(CriteriaData data)
     {
-        if (!float.IsNaN(data.IASDeviation))
-        {
-            IAS_values.Add(data.IASDeviation * data.IASDeviation);
-        }
-        if (!float.IsNaN(data.LateralDeviation))
-        {
-            LAT_values.Add(data.LateralDeviation * data.LateralDeviation);
-        }
-        if (!float.IsNaN(data.VerticalDeviation))
-        {
-            VERT_values.Add(data.VerticalDeviation * data.VerticalDeviation);
-        }
-
         if (timer != null)
         {
             double currenttime = timer.ElapsedTicks / Stopwatch.Frequency;
-            float maxLAT = 0;
-            float maxIAS = 0;
-            float maxVERT = 0;
 
             if (currenttime + 1 > lastTime)
             {
-                if (LAT_values.Count > 0)
-                {
-                    maxLAT = LAT_values.Max();
-                    float lat_integral = (1 / (data.MaxLateralDeviation - maxLAT)) * (data.MaxLateralDeviation * data.MaxLateralDeviation) / 2 - maxLAT;
-                    Sum_Lateral += lat_integral;
-                }
-                if (IAS_values.Count > 0)
-                {
-                    maxIAS = IAS_values.Max();
-                    float ias_integral = (1 / (data.MaxIASDeviation - maxIAS)) * (data.MaxIASDeviation * data.MaxIASDeviation) / 2 - maxIAS;
-                    Sum_IAS += ias_integral;
-                }
-                if (IAS_values.Count > 0)
-                {
-                    maxVERT = VERT_values.Max();
-                    float vert_integral = (1 / (data.MaxVerticalDeviation - maxVERT)) * (data.MaxVerticalDeviation * data.MaxVerticalDeviation) / 2 - maxVERT;
-                    Sum_VER += vert_integral;
-                }
-
-                IAS_values = new List<float>();
-                LAT_values = new List<float>();
-                VERT_values = new List<float>();
                 lastTime = currenttime + 1;
             }
         }

@@ -146,7 +146,7 @@ namespace FlightPathVector.server
                     if (!ConnectionClosed)
                     {
                         int bytesSent = handler.EndSend(ar);
-                        Console.WriteLine("Sent {0} bytes to client.", bytesSent);
+                        //Console.WriteLine("Sent {0} bytes to client.", bytesSent);
                     }
                 }
             }

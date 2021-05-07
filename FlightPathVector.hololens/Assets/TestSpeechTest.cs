@@ -177,16 +177,15 @@ public class TestSpeechTest : MonoBehaviour, ISpeechHandler
         ch3.sprite = (DataListener.criteria.TooSlow == user_answers[2]) ? checkSprite : crossSprite;
         ch4.sprite = (DataListener.criteria.TooFast == user_answers[3]) ? checkSprite : crossSprite;
 
-        int score = 0;
-        score += (DataListener.criteria.TooShort == user_answers[0]) ? 2 : 0;
-        score += (DataListener.criteria.TooFar == user_answers[1]) ? 2 : 0;
-        score += (DataListener.criteria.TooSlow == user_answers[2]) ? 2 : 0;
-        score += (DataListener.criteria.TooFast == user_answers[3]) ? 2 : 0;
+        int quizScore = 0;
+        quizScore += (DataListener.criteria.TooShort == user_answers[0]) ? 2 : 0;
+        quizScore += (DataListener.criteria.TooFar == user_answers[1]) ? 2 : 0;
+        quizScore += (DataListener.criteria.TooSlow == user_answers[2]) ? 2 : 0;
+        quizScore += (DataListener.criteria.TooFast == user_answers[3]) ? 2 : 0;
 
 
-        UserData.score = score;
         finish.text = "Continue";
-        UserData userData = new UserData(DataListener.criteria.Usercode, DataListener.criteria.CorrectAnswers, user_answers, time, UserData.score);
+        UserData userData = new UserData(DataListener.criteria.Usercode, DataListener.criteria.CorrectAnswers, user_answers, time, DataListener.criteria.Points, quizScore);
         var json = userData.ToString();
 
         DataListener.SendDataToCLient(json);
